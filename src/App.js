@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import MinesweeperHints from '../src/components/MinesweeperHints';
+import RPNCalculator from '../src/components/RPNCalculator';
 import './App.css';
-
 function App() {
+  const [activeTab, setActiveTab] = useState('calculator');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="tab-container">
+        <button 
+          onClick={() => setActiveTab('calculator')} 
+          className={`tab ${activeTab === 'calculator' ? 'active-tab' : ''}`}
         >
-          Learn React
-        </a>
-      </header>
+          RPN Calculator
+        </button>
+        <button 
+          onClick={() => setActiveTab('minesweeper')} 
+          className={`tab ${activeTab === 'minesweeper' ? 'active-tab' : ''}`}
+        >
+          Minesweeper Hints
+        </button>
+      </div>
+      {activeTab === 'calculator' && <RPNCalculator />}
+      {activeTab === 'minesweeper' && <MinesweeperHints />}
     </div>
   );
 }
-
 export default App;
