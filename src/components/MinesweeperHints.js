@@ -33,7 +33,7 @@ const MinesweeperHints = () => {
                 <textarea 
                     value={square} 
                     onChange={(e) => setSquare(e.target.value)} 
-                    placeholder="Enter Minesweeper board (each row separated by newline)"
+                    placeholder={"Enter Minesweeper board (each row separated by newline) Example:\n...\n...\n.*."}
                     className="hints-textarea"
                 />
                 <button type="submit" className="hints-button">Show Hints</button>
