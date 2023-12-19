@@ -6,14 +6,24 @@ const MinesweeperHints = () => {
     const [square, setSquare] = useState('');
     const [hints, setHints] = useState(null);
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/show-hints', { square: square.split('\n') });
             setHints(response.data.hints);
         } catch (error) {
-            console.error('Error fetching hints', error);
-        }
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                alert(`An error occurred: ${error.response.status} - ${error.response.data}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                alert('An error occurred: No response from server');
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                alert('An error occurred');
+            }        }
     };
 
     return (
@@ -28,7 +38,7 @@ const MinesweeperHints = () => {
                 />
                 <button type="submit" className="hints-button">Show Hints</button>
             </form>
-            {hints && <p>Hints: <pre>{hints.join('\n')}</pre></p>}
+            {hints !== null && <p className="hints-result">Hints: <span>{hints}</span></p>}
         </div>
     );
 };
