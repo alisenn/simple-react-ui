@@ -37,8 +37,14 @@ const MinesweeperHints = () => {
                     className="hints-textarea"
                 />
                 <button type="submit" className="hints-button">Show Hints</button>
-            </form>
-            {hints !== null && <p className="hints-result">Hints: <span>{hints}</span></p>}
+                </form>
+                {hints !== null && 
+                <div className="hints-result">
+                    {hints.map((row) => (
+                        <p key={row}>{row}</p>
+                    ))}
+                </div>
+            }
         </div>
     );
 };
