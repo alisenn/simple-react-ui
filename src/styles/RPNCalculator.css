@@ -26,3 +26,18 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+.calculator-result {
+    font-size: 24px;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.calculator-result span {
+    font-weight: bold;
+    color: #007BFF;
+}

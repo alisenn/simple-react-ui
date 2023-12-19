@@ -6,13 +6,24 @@ const RPNCalculator = () => {
     const [expression, setExpression] = useState('');
     const [result, setResult] = useState(null);
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/calculate', { expression });
             setResult(response.data.result);
         } catch (error) {
-            console.error('Error fetching result', error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                alert(`An error occurred: ${error.response.status} - ${error.response.data}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                alert('An error occurred: No response from server');
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                alert('An error occurred');
+            }
         }
     };
 
@@ -29,7 +40,7 @@ const RPNCalculator = () => {
                 />
                 <button type="submit" className="calculator-button">Calculate</button>
             </form>
-            {result !== null && <p>Result: {result}</p>}
+            {result !== null && <p className="calculator-result">Result: <span>{result}</span></p>}
         </div>
     );
 };
